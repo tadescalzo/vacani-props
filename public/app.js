@@ -9,3 +9,13 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+let card = document.querySelectorAll(".card");
+
+for (el of card) {
+  el.addEventListener("click", (e) => {
+    let child = e.target;
+    let parent = child.parentElement;
+    console.log(parent);
+  });
+}
