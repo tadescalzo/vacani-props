@@ -11,6 +11,8 @@
   --main-bg: #333;
   --text-main: #353535;
   --text-secondary: #7e7e7e;
+  --main-red: #ff6464;
+  --secondary-red: #f58c8c;
 }
 
 body {
@@ -19,6 +21,8 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -56,7 +60,7 @@ body {
       cursor: pointer;
     }
     li:hover {
-      font-weight: 700;
+      color: var(--main-red);
     }
   }
   @media screen and (max-width: 800px) {
@@ -101,7 +105,7 @@ body {
       &:focus {
         border-color: var(--text-main);
         box-shadow: none;
-        color: var(--text-secondary);
+        color: var(--main-red);
       }
     }
     .form-select:nth-child(3) {
@@ -111,7 +115,7 @@ body {
     &__btn {
       border: none;
       color: var(--main-card);
-      background-color: var(--main-bg);
+      background-color: var(--main-red);
       width: 8%;
       height: 70%;
       border-radius: 10rem;
@@ -149,7 +153,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
   &--title {
     font-size: 25px;
     margin: 2rem;
@@ -161,95 +164,123 @@ body {
     width: 100%;
     height: 100%;
   }
-  &--modal{
-    position: absolute;
-    width: 100vw;
-    min-height: 100vh;
-    background-color: var(--main-card);
-    z-index: 3;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 2rem;
+}
 
-    &__imgs{
-      min-width: 45%;
-      max-width: 45%;
-      
-      img{
-        min-width: 100%;
-        max-width: 100%;
-      }
+.modal {
+  position: absolute;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--main-card);
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 2rem;
+  transition: 0.5s;
+  &--close{
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--main-red);
+    transition: 0.5s;
+  }
+  &--close:hover{
+    color: var(--text-main);
+  }
+  &--imgs {
+    min-width: 45%;
+    max-width: 45%;
+
+    img {
+      min-width: 100%;
+      max-width: 100%;
     }
-    &__info{
-      min-width: 45%;
-      max-width: 45%;
-      max-height: 75%;
-      padding: 1rem;
+  }
+  &--info {
+    min-width: 45%;
+    max-width: 45%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    .modalPrice {
+      font-weight: 700;
+      font-size: 30px;
+    }
+    .modalExp {
+      font-size: 20px;
+    }
+    .modalInfo {
+      min-width: 50%;
+      min-height: 50%;
       display: flex;
+      align-items: center;
       flex-direction: column;
+      border: 1px solid var(--secondary-red);
+      margin-top: 1rem;
+      background-color: var(--secondary-card);
+      padding: 1rem;
+    }
+    .modalInfoInd, .modalInfoCheck {
+      height: fit-content;
+      width: 100%;
+      display: flex;
       justify-content: space-evenly;
-      .modalPrice{
-        font-weight: 700;
-        font-size: 30px;
+      flex-wrap: wrap;
+      align-items: center;
+      p {
+        flex: 1 0 27%;
+        text-align: center;
       }
-      .modalExp{
-        font-size: 20px;
-      }
-      .modalInfo{
-        min-width: 50%;
-        min-height: 50%;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        border: 1px solid #dfe0e5;
-        border-radius: 0.3rem;
-        margin-top: 1rem;
-        background-color: var(--secondary-card);
-      }
-      .modalInfoInd{
-        height: fit-content;
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-        align-items: center;
-        p{
-          flex: 1 0 27%;
-          text-align: center;
-        }
-        img{
-          width: 80%;
-        }
-      }
-      .modalInfoDesc{
-        width: 90%;
-      }
-      .modalInfoLine{
+      img {
         width: 80%;
       }
-      
     }
-    form{
+    .modalInfoDesc {
       width: 90%;
-      height: 40vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      margin-top: 2rem;
-      input{
-        border: none;
-        border-bottom: 1px solid var(--main-bg);
-        width: 50%;
-        outline: none;
-      }
-      #submitBtn{
-        border: 1px solid var(--main-bg);
-        background-color: var(--text-main);
-        padding: 0.5rem;
-        border-radius: 1.5rem;
-      }
+    }
+    .modalInfoLine {
+      width: 80%;
+      color: var(--main-red);
+    }
+  }
+  form {
+    width: 90%;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    input {
+      border: none;
+      border-bottom: 1px solid var(--main-bg);
+      width: 50%;
+      outline: none;
+      caret-color: var(--secondary-red);
+    }
+
+    #submitBtn {
+      border: 1px solid var(--main-bg);
+      background-color: var(--secondary-red);
+      padding: 0.5rem;
+      transition: 0.5s;
+    }
+    #wppBtn {
+      background-color: #25d366;
+      border: 1px solid var(--main-bg);
+      padding: 0.5rem;
+      width: 50%;
+      text-align: center;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: 0.5s;
+    }
+    #submitBtn:hover, #wppBtn:hover{
+      background-color: var(--text-main);
+      color: var(--main-card);
     }
   }
 }
@@ -281,9 +312,13 @@ body {
         max-height: 250px;
         min-height: 250px;
         overflow: hidden;
+        pointer-events: none;
         &.active {
           max-height: 250px;
           min-height: 250px;
+          img{
+            pointer-events: none;
+          }
         }
       }
     }
@@ -299,17 +334,21 @@ body {
       font-weight: 700;
       color: var(--text-main);
       font-size: 20px;
+      pointer-events: none;
     }
     &__exp {
       color: var(--text-secondary);
+      pointer-events: none;
     }
     &__desc {
       color: var(--text-secondary);
       font-size: 14px;
+      pointer-events: none;
     }
     &__line {
       width: 90%;
-      border-bottom: 0.2px solid var(--text-secondary);
+      border-bottom: 0.2px solid var(--main-red);
+      pointer-events: none;
     }
     &__info {
       display: flex;
@@ -318,6 +357,7 @@ body {
       flex-wrap: wrap;
       text-align: center;
       margin-top: 0.5rem;
+      pointer-events: none;
       p {
         flex: 1 0 40%;
         margin: 0;
@@ -347,7 +387,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--main-bg);
+  background-color: var(--main-red);
   &--media,
   &--info {
     list-style: none;
@@ -362,7 +402,7 @@ body {
       cursor: pointer;
       transition: 0.5s;
       &:hover {
-        color: var(--text-secondary);
+        color: var(--text-main);
       }
     }
   }

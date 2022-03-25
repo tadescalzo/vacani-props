@@ -12,6 +12,8 @@
   --main-bg: #333;
   --text-main: #353535;
   --text-secondary: #7e7e7e;
+  --main-red: #ff6464;
+  --secondary-red: #f58c8c;
 }
 
 body {
@@ -29,6 +31,8 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -96,7 +100,7 @@ body {
 }
 
 .navbar--center li:hover {
-  font-weight: 700;
+  color: var(--main-red);
 }
 
 @media screen and (max-width: 800px) {
@@ -162,7 +166,7 @@ body {
   border-color: var(--text-main);
   -webkit-box-shadow: none;
           box-shadow: none;
-  color: var(--text-secondary);
+  color: var(--main-red);
 }
 
 .header--form .form-select:nth-child(3) {
@@ -173,7 +177,7 @@ body {
 .header--form__btn {
   border: none;
   color: var(--main-card);
-  background-color: var(--main-bg);
+  background-color: var(--main-red);
   width: 8%;
   height: 70%;
   border-radius: 10rem;
@@ -222,7 +226,6 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: relative;
 }
 
 .main--title {
@@ -243,7 +246,7 @@ body {
   height: 100%;
 }
 
-.main--modal {
+.modal {
   position: absolute;
   width: 100vw;
   min-height: 100vh;
@@ -259,22 +262,38 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   padding-top: 2rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-.main--modal__imgs {
+.modal--close {
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--main-red);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.modal--close:hover {
+  color: var(--text-main);
+}
+
+.modal--imgs {
   min-width: 45%;
   max-width: 45%;
 }
 
-.main--modal__imgs img {
+.modal--imgs img {
   min-width: 100%;
   max-width: 100%;
 }
 
-.main--modal__info {
+.modal--info {
   min-width: 45%;
   max-width: 45%;
-  max-height: 75%;
   padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -288,16 +307,16 @@ body {
           justify-content: space-evenly;
 }
 
-.main--modal__info .modalPrice {
+.modal--info .modalPrice {
   font-weight: 700;
   font-size: 30px;
 }
 
-.main--modal__info .modalExp {
+.modal--info .modalExp {
   font-size: 20px;
 }
 
-.main--modal__info .modalInfo {
+.modal--info .modalInfo {
   min-width: 50%;
   min-height: 50%;
   display: -webkit-box;
@@ -310,13 +329,13 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border: 1px solid #dfe0e5;
-  border-radius: 0.3rem;
+  border: 1px solid var(--secondary-red);
   margin-top: 1rem;
   background-color: var(--secondary-card);
+  padding: 1rem;
 }
 
-.main--modal__info .modalInfoInd {
+.modal--info .modalInfoInd, .modal--info .modalInfoCheck {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -334,28 +353,29 @@ body {
           align-items: center;
 }
 
-.main--modal__info .modalInfoInd p {
+.modal--info .modalInfoInd p, .modal--info .modalInfoCheck p {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 27%;
           flex: 1 0 27%;
   text-align: center;
 }
 
-.main--modal__info .modalInfoInd img {
+.modal--info .modalInfoInd img, .modal--info .modalInfoCheck img {
   width: 80%;
 }
 
-.main--modal__info .modalInfoDesc {
+.modal--info .modalInfoDesc {
   width: 90%;
 }
 
-.main--modal__info .modalInfoLine {
+.modal--info .modalInfoLine {
   width: 80%;
+  color: var(--main-red);
 }
 
-.main--modal form {
+.modal form {
   width: 90%;
-  height: 40vh;
+  height: 60vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -372,18 +392,37 @@ body {
   margin-top: 2rem;
 }
 
-.main--modal form input {
+.modal form input {
   border: none;
   border-bottom: 1px solid var(--main-bg);
   width: 50%;
   outline: none;
+  caret-color: var(--secondary-red);
 }
 
-.main--modal form #submitBtn {
+.modal form #submitBtn {
   border: 1px solid var(--main-bg);
-  background-color: var(--text-main);
+  background-color: var(--secondary-red);
   padding: 0.5rem;
-  border-radius: 1.5rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.modal form #wppBtn {
+  background-color: #25d366;
+  border: 1px solid var(--main-bg);
+  padding: 0.5rem;
+  width: 50%;
+  text-align: center;
+  color: var(--text-main);
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.modal form #submitBtn:hover, .modal form #wppBtn:hover {
+  background-color: var(--text-main);
+  color: var(--main-card);
 }
 
 .card {
@@ -423,11 +462,16 @@ body {
   max-height: 250px;
   min-height: 250px;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .card--top .carousel-item.active {
   max-height: 250px;
   min-height: 250px;
+}
+
+.card--top .carousel-item.active img {
+  pointer-events: none;
 }
 
 .card--bottom {
@@ -450,20 +494,24 @@ body {
   font-weight: 700;
   color: var(--text-main);
   font-size: 20px;
+  pointer-events: none;
 }
 
 .card--bottom__exp {
   color: var(--text-secondary);
+  pointer-events: none;
 }
 
 .card--bottom__desc {
   color: var(--text-secondary);
   font-size: 14px;
+  pointer-events: none;
 }
 
 .card--bottom__line {
   width: 90%;
-  border-bottom: 0.2px solid var(--text-secondary);
+  border-bottom: 0.2px solid var(--main-red);
+  pointer-events: none;
 }
 
 .card--bottom__info {
@@ -476,6 +524,7 @@ body {
       flex-wrap: wrap;
   text-align: center;
   margin-top: 0.5rem;
+  pointer-events: none;
 }
 
 .card--bottom__info p {
@@ -516,7 +565,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: var(--main-bg);
+  background-color: var(--main-red);
 }
 
 .footer--media, .footer--info {
@@ -543,7 +592,7 @@ body {
 }
 
 .footer--media__link:hover, .footer--info__link:hover {
-  color: var(--text-secondary);
+  color: var(--text-main);
 }
 
 @media screen and (max-width: 800px) {
