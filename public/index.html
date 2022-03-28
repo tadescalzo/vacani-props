@@ -30,32 +30,33 @@
         <h1 class="navbar--left__title">Vacani</h1>
       </div>
       <ul class="navbar--center">
-        <li>Home</li>
-        <li>Comprar</li>
-        <li>Alquilar</li>
-        <li>Vender</li>
-        <li>¿Quienes somos?</li>
-        <li>Contacto</li>
+        <a href="index.html" class="navHome"><li>Home</li></a>
+        <a href="#" class="navBuy"><li>Comprar</li></a>
+        <a href="#" class="navAlq"><li>Alquilar</li></a>
+        <a href="#" class="navSell"><li>Vender</li></a>
+        <a href="#" class="navFaq"><li>¿Quienes somos?</li></a>
+        <a href="#" class="navCont"><li>Contacto</li></a>
       </ul>
     </nav>
-    <header class="header">
+    <header class="header" id="header">
       <form class="header--form">
         <select class="form-select" id="barType">
-          <option value="venta">Venta</option>
-          <option value="alquiler">Alquiler</option>
+          <option value="Venta">Venta</option>
+          <option value="Alquiler">Alquiler</option>
         </select>
         <select class="form-select" id="barProp">
-          <option value="departamento">Departamento</option>
-          <option value="casa">Casa</option>
-          <option value="oficina">Oficina</option>
-          <option value="ph">PH</option>
+          <option value="Departamento">Departamento</option>
+          <option value="Casa">Casa</option>
+          <option value="Oficina">Oficina</option>
+          <option value="PH">PH</option>
         </select>
         <select class="form-select" id="barCity">
-          <option value="victoria">Victoria</option>
-          <option value="sanfernando">San Fernando</option>
-          <option value="virreyes">Virreyes</option>
-          <option value="tigre">Tigre</option>
-          <option value="sanisidro">San Isidro</option>
+          <option value="Todas">Todas</option>
+          <option value="Victoria">Victoria</option>
+          <option value="San Fernando">San Fernando</option>
+          <option value="Virreyes">Virreyes</option>
+          <option value="Tigre">Tigre</option>
+          <option value="San Isidro">San Isidro</option>
         </select>
         <button class="header--form__btn">
           <i class="fa-solid fa-magnifying-glass"></i> Buscar

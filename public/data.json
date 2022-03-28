@@ -12,12 +12,15 @@
        "garage":"1",
        "old":"A estrenar",
        "baths":"1",
+       "city": "Victoria",
+       "type": "Alquiler",
+       "prop":"Departamento",
        "services":{
-         "net": true,
-         "elec":true,
-         "gas":true,
-         "pav":true,
-         "water":true
+        "Internet": true,
+        "Electricidad":true,
+        "Gas":false,
+       "Pavimento":true,
+       "Agua":true
        }
      },
      {
@@ -31,12 +34,15 @@
        "garage":"1",
        "old":"A estrenar",
        "baths":"1",
+       "city": "Victoria",
+       "type": "Alquiler",
+       "prop":"Departamento",
        "services":{
-         "net": false,
-         "elec":true,
-         "gas":true,
-        "pav":true,
-        "water":true
+        "Internet": false,
+        "Electricidad":true,
+        "Gas":true,
+       "Pavimento":true,
+       "Agua":true
        }
     },
      {
@@ -50,18 +56,21 @@
        "garage":"1",
        "old":"A estrenar",
        "baths":"2",
+       "city": "Virreyes",
+       "type": "Alquiler",
+       "prop":"PH",
        "services":{
-         "net": true,
-         "elec":false,
-         "gas":true,
-        "pav":true,
-        "water":false
+        "Internet": true,
+        "Electricidad":true,
+        "Gas":true,
+       "Pavimento":true,
+       "Agua":true
        }
     },
     {
       "id": 4,
       "title": "Departamento en alquiler. Av. Peron al 2000 San Fernando Centro.",
-      "price": "$80.000",
+      "price": "u$d80.000",
       "exp": "$20.000",
       "mPlain": "30",
       "mOcc":"30",
@@ -69,12 +78,15 @@
       "garage":"1",
       "old":"A estrenar",
       "baths":"1",
+      "city": "San Isidro",
+      "type": "Venta",
+      "prop":"Departamento",
       "services":{
-        "net": false,
-        "elec":true,
-        "gas":false,
-       "pav":true,
-       "water":true
+        "Internet": false,
+        "Electricidad":true,
+        "Gas":false,
+       "Pavimento":true,
+       "Agua":true
       }
       }
    ]
