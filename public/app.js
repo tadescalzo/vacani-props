@@ -28,6 +28,7 @@ let navCont = document.querySelectorAll(".navCont");
 let closeMobile = document.querySelector(".navbar--mobile__close");
 let menuMobile = document.querySelector(".navbar--mobile__menu");
 let openMobile = document.querySelector(".navbar--mobile");
+let mainTitle = document.querySelector(".main--title");
 
 /*FUNCION CARGAR SERVICIOS DENTRO DEL MODAL*/
 const loadInfo = (services) => {
@@ -58,7 +59,8 @@ const clickFunction = (items, modal, body) => {
         child.className == "carousel-inner"
       ) {
         modal.style.display = "flex";
-        body.style.overflowY = "hidden";
+        container.style.opacity = 0;
+        mainTitle.style.opacity = 0;
         const {
           id,
           title,
@@ -78,6 +80,17 @@ const clickFunction = (items, modal, body) => {
         setTimeout(() => {
           /*CARGAMOS LA PANTALLA DEL ITEM SELECCIONADO*/
           modal.innerHTML = `<span class="modal--close">X</span>
+          <div class='modal--info'>
+          <h2 class="modalTitle">
+                ${title}
+              </h2>
+              <span class="modalPrice">${price}</span>
+              ${
+                exp != 0
+                  ? `<span class="card--bottom__exp">+${exp}</span>`
+                  : `<span class="card--bottom__exp">Sin Expensas</span>`
+              }
+          </div>
             <div class="modal--imgs">
               <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -151,15 +164,6 @@ const clickFunction = (items, modal, body) => {
               </form>
             </div>
             <div class="modal--info">
-              <h2 class="modalTitle">
-                ${title}
-              </h2>
-              <span class="modalPrice">${price}</span>
-              ${
-                exp != 0
-                  ? `<span class="card--bottom__exp">+${exp}</span>`
-                  : `<span class="card--bottom__exp">Sin Expensas</span>`
-              }
               <div class="modalInfo">
                 <span>INFORMACION DE LA PROPIEDAD</span>
                 <hr class="modalInfoLine" />
@@ -212,15 +216,19 @@ const clickFunction = (items, modal, body) => {
               </div>
             </div>`;
           modal.style.opacity = 1;
-
+          container.style.display = "none";
+          mainTitle.style.display = "none";
           /*UNA VEZ CARGA EL MODAL, CARGAMOS LA FUNCION DE CERRAR EL MISMO*/
           let closeModal = document.querySelector(".modal--close");
           closeModal.addEventListener("click", (e) => {
             e.preventDefault();
             modal.style.opacity = 0;
-            body.style.overflowY = "auto";
+            container.style.display = "flex";
+            mainTitle.style.display = "flex";
             setTimeout(() => {
               modal.style.display = "none";
+              container.style.opacity = 1;
+              mainTitle.style.opacity = 1;
             }, 700);
           });
         }, 700);
@@ -486,6 +494,13 @@ const data = new Promise((resolve, reject) => {
       for (alq of navAlq) {
         alq.addEventListener("click", (e) => {
           e.preventDefault();
+          menuMobile.style.opacity = 0;
+          closeMobile.style.opacity = 0;
+
+          setTimeout(() => {
+            menuMobile.style.display = "none";
+            closeMobile.style.display = "none";
+          }, 300);
           let items = data.data.items;
           scroll({
             top: 320,
@@ -617,6 +632,13 @@ const data = new Promise((resolve, reject) => {
       /*LOAD VENTA*/
       for (buy of navBuy) {
         buy.addEventListener("click", (e) => {
+          menuMobile.style.opacity = 0;
+          closeMobile.style.opacity = 0;
+
+          setTimeout(() => {
+            menuMobile.style.display = "none";
+            closeMobile.style.display = "none";
+          }, 300);
           e.preventDefault();
           let items = data.data.items;
           scroll({
