@@ -36,7 +36,7 @@ const loadInfo = (services) => {
   checkboxes.innerHTML = " ";
   for (service in services) {
     if (services[service] == true) {
-      checkboxes.innerHTML += `<li>${service}</li>`;
+      checkboxes.innerHTML += `<li><i class="fa-solid fa-square-check"></i>${service}</li>`;
     }
   }
 };
@@ -61,6 +61,8 @@ const clickFunction = (items, modal, body) => {
         modal.style.display = "flex";
         container.style.opacity = 0;
         mainTitle.style.opacity = 0;
+        header.style.opacity = 0;
+        document.documentElement.scrollTop = 0;
         const {
           id,
           title,
@@ -80,18 +82,23 @@ const clickFunction = (items, modal, body) => {
         setTimeout(() => {
           /*CARGAMOS LA PANTALLA DEL ITEM SELECCIONADO*/
           modal.innerHTML = `<span class="modal--close">X</span>
-          <div class='modal--info'>
-          <h2 class="modalTitle">
+          
+          <div class='modal--upper'>
+          <div class='modal--upper__header'>
+              <h2 class="modalTitle">
                 ${title}
               </h2>
-              <span class="modalPrice">${price}</span>
+              <div class='modalPrice'>
+              <span class="totalPrice">${price}</span>
               ${
                 exp != 0
                   ? `<span class="card--bottom__exp">+${exp}</span>`
                   : `<span class="card--bottom__exp">Sin Expensas</span>`
               }
+              <p class='modalInfoType'>Tipo: <strong>${type}</strong></p>
+              </div> 
           </div>
-            <div class="modal--imgs">
+            <div class="modal--upper__imgs">
               <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
@@ -141,40 +148,19 @@ const clickFunction = (items, modal, body) => {
                   <span class="visually-hidden">Next</span>
                 </button>
               </div>
-              <form action="submit">
-                <h3>Consulta por esta propiedad</h3>
-                <label for="submitName">Nombre y apellido:</label>
-                <input type="text" id="submitName" />
-                <label for="submitMail">Mail de contacto:</label>
-                <input type="email" id="submitMail" />
-                <label for="submitPhone">Telefono de contacto:</label>
-                <input type="text" id="submitPhone" />
-                <input
-                  type="button"
-                  value="Quiero que me contacten"
-                  id="submitBtn"
-                />
-                <a
-                  href="https://api.whatsapp.com/send/?phone=5491130105048&text=Me+interesa+${wppTxt}"
-                  id="wppBtn"
-                  target="_blank"
-                  >Enviar Whatsapp</a
-                >
-                <img src="images/logoNav.svg" alt="" />
-              </form>
             </div>
-            <div class="modal--info">
+            </div>
+            <div class='modal--lower'>
+            <div class="modal--lower__info">
               <div class="modalInfo">
                 <span>INFORMACION DE LA PROPIEDAD</span>
                 <hr class="modalInfoLine" />
                 <div class="modalInfoInd">
-                  <p>Metros totales: <strong>${mPlain}</strong></p>
-                  <p>Metros Cubiertos: <strong>${mOcc}</strong></p>
-                  <p>Baños: <strong>${baths}</strong></p>
-                  <p>Ambientes: <strong>${dorm}</strong></p>
-                  <p>Cochera: <strong>${garage}</strong></p>
-                  <p class='modalInfoType'>Tipo: <strong>${type}</strong></p>
-                  <p>Antiguedad: <strong>${old}</strong></p>
+                  <p><i class="fa-solid fa-vector-square"></i> Metros totales: <strong>${mPlain}</strong></p>
+                  <p><i class="fa-solid fa-vector-square"></i> Metros Cubiertos: <strong>${mOcc}</strong></p>
+                  <p><i class="fa-solid fa-bath"></i> Ambientes: <strong>${dorm}</strong></p>
+                  <p><i class="fa-solid fa-car"></i> Cochera: <strong>${garage}</strong></p>
+                  <p><i class="fa-solid fa-calendar-days"></i> Antiguedad: <strong>${old}</strong></p>
                 </div>
               </div>
               <div class="modalInfo">
@@ -214,10 +200,33 @@ const clickFunction = (items, modal, body) => {
                   <img src="https://i.blogs.es/b4dd5c/maps/1366_2000.png" alt="" />
                 </div>
               </div>
-            </div>`;
+            </div>
+            <form action="submit">
+                <h3>Consulta por esta propiedad</h3>
+                <label for="submitName">Nombre y apellido:</label>
+                <input type="text" id="submitName" />
+                <label for="submitMail">Mail de contacto:</label>
+                <input type="email" id="submitMail" />
+                <label for="submitPhone">Telefono de contacto:</label>
+                <input type="text" id="submitPhone" />
+                <input
+                  type="button"
+                  value="Quiero que me contacten"
+                  id="submitBtn"
+                />
+                <a
+                  href="https://api.whatsapp.com/send/?phone=5491130105048&text=Me+interesa+${wppTxt}"
+                  id="wppBtn"
+                  target="_blank"
+                  >Enviar Whatsapp</a
+                >
+                <img src="images/logoNav.svg" alt="" />
+              </form>
+              </div>`;
           modal.style.opacity = 1;
           container.style.display = "none";
           mainTitle.style.display = "none";
+          header.style.display = "none";
           /*UNA VEZ CARGA EL MODAL, CARGAMOS LA FUNCION DE CERRAR EL MISMO*/
           let closeModal = document.querySelector(".modal--close");
           closeModal.addEventListener("click", (e) => {
@@ -225,10 +234,12 @@ const clickFunction = (items, modal, body) => {
             modal.style.opacity = 0;
             container.style.display = "flex";
             mainTitle.style.display = "flex";
+            header.style.display = "flex";
             setTimeout(() => {
               modal.style.display = "none";
               container.style.opacity = 1;
               mainTitle.style.opacity = 1;
+              header.style.opacity = 1;
             }, 700);
           });
         }, 700);
