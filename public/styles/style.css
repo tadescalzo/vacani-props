@@ -292,6 +292,8 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .header--form {
@@ -378,7 +380,9 @@ body {
 
 .main {
   width: 80%;
-  min-height: 100vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   margin-bottom: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -468,29 +472,29 @@ body {
 }
 
 .main .modal {
-  width: 100%;
-  min-height: 100vh;
+  width: 95%;
   position: relative;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   background-color: var(--main-card);
   display: none;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding-top: 2rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 8rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  overflow: hidden;
 }
 
 .main .modal--close {
   position: absolute;
-  top: 2%;
+  top: 7%;
   right: 5%;
   font-weight: 700;
   cursor: pointer;
@@ -503,15 +507,77 @@ body {
   color: var(--text-main);
 }
 
-.main .modal--imgs {
-  min-width: 45%;
-  max-width: 45%;
+.main .modal--upper {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.main .modal--info {
+.main .modal--upper__imgs {
   min-width: 75%;
   max-width: 75%;
-  padding: 1rem;
+}
+
+.main .modal--upper__header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin-bottom: 2rem;
+}
+
+.main .modal--upper__header .modalPrice {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 15%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main .modal--upper__header .totalPrice {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.main .modal--lower {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main .modal--lower__info {
+  min-width: 40%;
+  max-width: 40%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -522,41 +588,36 @@ body {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
-.main .modal--info .modalPrice {
+.main .modal--lower__info .modalPrice {
   font-weight: 700;
   font-size: 30px;
 }
 
-.main .modal--info .modalExp {
+.main .modal--lower__info .modalExp {
   font-size: 20px;
 }
 
-.main .modal--info .modalInfo {
-  min-width: 50%;
+.main .modal--lower__info .modalInfo {
+  width: 100%;
   min-height: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border: 1px solid var(--strong-red);
   margin-top: 1rem;
-  background-color: var(--secondary-card);
   padding: 1rem;
 }
 
-.main .modal--info .modalInfoInd,
-.main .modal--info .modalInfoCheck {
+.main .modal--lower__info .modalInfoInd,
+.main .modal--lower__info .modalInfoCheck {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -564,44 +625,77 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  list-style: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
-.main .modal--info .modalInfoInd p,
-.main .modal--info .modalInfoCheck p {
+.main .modal--lower__info .modalInfoInd p,
+.main .modal--lower__info .modalInfoCheck p {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 27%;
           flex: 1 0 27%;
-  text-align: center;
 }
 
-.main .modal--info .modalInfoInd img,
-.main .modal--info .modalInfoCheck img {
+.main .modal--lower__info .modalInfoInd img,
+.main .modal--lower__info .modalInfoCheck img {
   width: 80%;
 }
 
-.main .modal--info .modalInfoDesc {
+.main .modal--lower__info .modalInfoInd .checkService,
+.main .modal--lower__info .modalInfoCheck .checkService {
+  width: 24px;
+  height: 24px;
+  font-size: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: var(--main-red);
+  border: 1px solid var(--main-bg);
+  margin-right: 0.2rem;
+}
+
+.main .modal--lower__info .modalInfoCheck {
+  width: 90%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.main .modal--lower__info .modalInfoCheck li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 21%;
+          flex: 1 0 21%;
+  margin-top: 0.5rem;
+}
+
+.main .modal--lower__info .modalInfoDesc {
   width: 90%;
 }
 
-.main .modal--info .modalInfoLine {
-  width: 80%;
+.main .modal--lower__info .modalInfoLine {
+  width: 90%;
   color: var(--main-red);
 }
 
-.main .modal--info .modalInfoType {
+.main .modal--lower__info .modalInfoType {
   text-transform: capitalize;
 }
 
-.main .modal form {
-  width: 90%;
+.main .modal--lower form {
+  width: 35%;
   height: 60vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -619,19 +713,19 @@ body {
   margin-top: 2rem;
 }
 
-.main .modal form input {
+.main .modal--lower form input {
   border: none;
   border-bottom: 1px solid var(--main-bg);
-  width: 50%;
+  width: 80%;
   outline: none;
   caret-color: var(--secondary-red);
 }
 
-.main .modal form img {
+.main .modal--lower form img {
   width: 50% !important;
 }
 
-.main .modal form #submitBtn {
+.main .modal--lower form #submitBtn {
   border: 1px solid var(--main-bg);
   background-color: var(--strong-red);
   padding: 0.5rem;
@@ -640,11 +734,11 @@ body {
   font-weight: 700;
 }
 
-.main .modal form #wppBtn {
+.main .modal--lower form #wppBtn {
   background-color: #25d366;
   border: 1px solid var(--main-bg);
   padding: 0.5rem;
-  width: 50%;
+  width: 80%;
   text-align: center;
   color: var(--text-main);
   text-decoration: none;
@@ -653,8 +747,8 @@ body {
   font-weight: 700;
 }
 
-.main .modal form #submitBtn:hover,
-.main .modal form #wppBtn:hover {
+.main .modal--lower form #submitBtn:hover,
+.main .modal--lower form #wppBtn:hover {
   background-color: var(--main-bg);
   color: var(--main-card);
 }
