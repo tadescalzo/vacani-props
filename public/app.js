@@ -59,6 +59,7 @@ const clickFunction = (items, modal, body) => {
         child.className == "carousel-inner"
       ) {
         modal.style.display = "flex";
+        modal.innerHTML = `<div class="lds-ripple"><div></div><div></div></div>`;
         container.style.opacity = 0;
         mainTitle.style.opacity = 0;
         header.style.opacity = 0;
@@ -77,6 +78,7 @@ const clickFunction = (items, modal, body) => {
           city,
           type,
           services,
+          dir,
         } = modalResult;
         let wppTxt = title.split(" ").join("+");
         setTimeout(() => {
@@ -85,17 +87,22 @@ const clickFunction = (items, modal, body) => {
           
           <div class='modal--upper'>
           <div class='modal--upper__header'>
+              <div class='upperLeft'>
               <h2 class="modalTitle">
                 ${title}
               </h2>
-              <div class='modalPrice'>
+              <h5><i class="fa-solid fa-location-dot"></i> ${dir}</h5>
+              </div>
+              <div class='upperRight'>
+              <div class='column'>
               <span class="totalPrice">${price}</span>
               ${
                 exp != 0
                   ? `<span class="card--bottom__exp">+${exp}</span>`
                   : `<span class="card--bottom__exp">Sin Expensas</span>`
               }
-              <p class='modalInfoType'>Tipo: <strong>${type}</strong></p>
+              </div>
+              <p class='modalInfoType'><strong>${type}</strong></p>
               </div> 
           </div>
             <div class="modal--upper__imgs">
@@ -160,7 +167,8 @@ const clickFunction = (items, modal, body) => {
                   <p><i class="fa-solid fa-vector-square"></i> Metros Cubiertos: <strong>${mOcc}</strong></p>
                   <p><i class="fa-solid fa-bath"></i> Ambientes: <strong>${dorm}</strong></p>
                   <p><i class="fa-solid fa-car"></i> Cochera: <strong>${garage}</strong></p>
-                  <p><i class="fa-solid fa-calendar-days"></i> Antiguedad: <strong>${old}</strong></p>
+                  <p><i class="fa-solid fa-calendar-days"></i> Antiguedad:<br><strong>${old}</strong></p>
+                  <p><i class="fa-solid fa-money-bill-1-wave"></i> Valor: <strong>${price}</strong></p>
                 </div>
               </div>
               <div class="modalInfo">
@@ -223,7 +231,6 @@ const clickFunction = (items, modal, body) => {
                 <img src="images/logoNav.svg" alt="" />
               </form>
               </div>`;
-          modal.style.opacity = 1;
           container.style.display = "none";
           mainTitle.style.display = "none";
           header.style.display = "none";
@@ -231,12 +238,12 @@ const clickFunction = (items, modal, body) => {
           let closeModal = document.querySelector(".modal--close");
           closeModal.addEventListener("click", (e) => {
             e.preventDefault();
-            modal.style.opacity = 0;
+            modal.style.display = "none";
             container.style.display = "flex";
             mainTitle.style.display = "flex";
             header.style.display = "flex";
             setTimeout(() => {
-              modal.style.display = "none";
+              modal.innerHTML = " ";
               container.style.opacity = 1;
               mainTitle.style.opacity = 1;
               header.style.opacity = 1;
