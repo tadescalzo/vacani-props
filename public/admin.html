@@ -58,8 +58,62 @@
           <input type="text" id="user" />
           <label for="password">Contraseña</label>
           <input type="password" id="password" />
+          <input type="button" value="Ingresar" id="login" />
         </form>
       </section>
+      <section class="main--admin__menu">
+        <button class="openUpload">Subir publicacion</button>
+        <button class="openList">Ver publicaciones</button>
+      </section>
+      <section class="main--admin__upload">
+        <form action="submit" id="formUno">
+          <h3>1/3</h3>
+          <label for="itemTitle">Titulo</label>
+          <input type="text" id="itemTitle" />
+          <label for="itemLocate">Ciudad</label>
+          <input type="text" id="itemLocate" />
+          <label for="itemType">Modalidad</label>
+          <select name="type" id="itemType">
+            <option value="alquiler">Alquiler</option>
+            <option value="venta">Venta</option>
+          </select>
+          <label for="itemPrice">Valor</label>
+          <input type="text" id="itemPrice" />
+          <label for="itemExp">Expensas</label>
+          <input type="text" id="itemExp" />
+          <label for="itemMets">Metros² totales</label>
+          <input type="text" id="itemMets" />
+          <label for="itemUsedmets">Metros² cubiertos</label>
+          <input type="text" id="itemUsedmets" />
+          <label for="itemRooms">Ambientes</label>
+          <input type="text" id="itemRooms" />
+          <label for="itemCar">Cochera</label>
+          <input type="text" id="itemCar" />
+          <label for="itemAge">Antiguedad</label>
+          <input type="text" id="itemAge" />
+          <input type="button" value="Continuar" id="submitForm1" />
+        </form>
+        <form action="" id="formDos">
+          <h3>2/3</h3>
+          <label for="itemDesc">Descripcion:</label>
+          <input type="text" id="itemDesc" />
+          <input type="button" value="Agregar" id="addDesc" />
+          <ul id="showDesc"></ul>
+          <label for="itemLat">Mapa Latitud</label>
+          <input type="text" id="itemLat" />
+          <label for="itemLong">Mapa Longitud</label>
+          <input type="text" id="itemLong" />
+          <input type="button" value="Continuar" id="submitForm2" />
+        </form>
+        <form action="submit" id="formTres">
+          <h3>3/3</h3>
+          <label for="itemPhoto">Seleccione la foto</label>
+          <input type="file" id="itemPhoto" />
+          <input type="button" value="Agregar" id="addPhoto" />
+          <input type="button" value="Cargar" id="submitForm3" />
+        </form>
+      </section>
+      <section class="main--admin__list"></section>
     </main>
 
     <footer class="footer">
@@ -87,6 +141,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

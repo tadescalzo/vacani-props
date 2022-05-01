@@ -9,11 +9,15 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+var storage = firebase.storage();
 
 let modal = document.querySelector(".modal");
 let body = document.querySelector("#body");
 let main = document.querySelector(".main");
 let header = document.querySelector(".header");
+let menu = document.querySelector(".main--admin__menu");
+let login = document.querySelector(".main--admin__login");
 let container = document.querySelector(".main--container");
 let mainBtn = document.querySelector(".header--form__btn");
 let cityFilter = document.querySelector("#barCity");
@@ -29,6 +33,36 @@ let closeMobile = document.querySelector(".navbar--mobile__close");
 let menuMobile = document.querySelector(".navbar--mobile__menu");
 let openMobile = document.querySelector(".navbar--mobile");
 let mainTitle = document.querySelector(".main--title");
+let loginBtn = document.querySelector("#login");
+let loginUser = document.querySelector("#user");
+let loginPass = document.querySelector("#password");
+let openUpload = document.querySelector(".openUpload");
+let openList = document.querySelector(".openList");
+let uploadModal = document.querySelector(".main--admin__upload");
+let submitForm1 = document.querySelector("#submitForm1");
+let submitForm2 = document.querySelector("#submitForm2");
+let submitForm3 = document.querySelector("#submitForm3");
+let formUno = document.querySelector("#formUno");
+let formDos = document.querySelector("#formDos");
+let formTres = document.querySelector("#formTres");
+let itemTitle = document.querySelector("#itemTitle");
+let itemLocate = document.querySelector("#itemLocate");
+let itemType = document.querySelector("#itemType");
+let itemPrice = document.querySelector("#itemPrice");
+let itemExp = document.querySelector("#itemExp");
+let itemMets = document.querySelector("#itemMets");
+let itemUsedmets = document.querySelector("#itemUsedmets");
+let itemRooms = document.querySelector("#itemRooms");
+let itemCar = document.querySelector("#itemCar");
+let itemAge = document.querySelector("#itemAge");
+let itemDesc = document.querySelector("#itemDesc");
+let itemLat = document.querySelector("#itemLat");
+let itemLong = document.querySelector("#itemLong");
+let itemPhoto = document.querySelector("#itemPhoto");
+let addDesc = document.querySelector("#addDesc");
+let addPhoto = document.querySelector("#addPhoto");
+let showDesc = document.querySelector("#showDesc");
+let descArray = [];
 
 /*FUNCION CARGAR SERVICIOS DENTRO DEL MODAL*/
 const loadInfo = (services) => {
@@ -788,4 +822,118 @@ const data = new Promise((resolve, reject) => {
     });
 }).catch((err) => {
   reject(err);
+});
+
+/*LOGIN*/
+loginBtn.addEventListener("click", (e) => {
+  e.preventDefault;
+  let email = loginUser.value;
+  let password = loginPass.value;
+  console.log("click");
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      console.log(user);
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+    });
+});
+
+/*OPEN UPLOAD MODAL*/
+openUpload.addEventListener("click", () => {
+  menu.style.opacity = 0;
+  setTimeout(() => {
+    menu.style.display = "none";
+    uploadModal.style.display = "flex";
+  }, 500);
+});
+
+/*FIRST CONFIRM UPLOAD*/
+submitForm1.addEventListener("click", () => {
+  formUno.style.opacity = 0;
+  setTimeout(() => {
+    formUno.style.display = "none";
+    formDos.style.display = "flex";
+  }, 500);
+});
+/*SECOND CONFIRM UPLOAD*/
+submitForm2.addEventListener("click", () => {
+  formDos.style.opacity = 0;
+  setTimeout(() => {
+    formDos.style.display = "none";
+    formTres.style.display = "flex";
+  }, 500);
+});
+/*ADD DESC*/
+addDesc.addEventListener("click", () => {
+  let descResult = itemDesc.value;
+  descArray.push(descResult);
+  console.log(descArray);
+  showDesc.innerHTML = "";
+  descArray.forEach((el) => {
+    let id = descArray.indexOf(el);
+    console.log(id);
+    showDesc.innerHTML += `<li class="itemDesc" data-id='${id}'><span>${el}</span><input type='button' value='Eliminar' class="deleteDesc" /></li>`;
+  });
+  itemDesc.value = "";
+  let deleteDesc = document.querySelectorAll(".deleteDesc");
+  /*DELETE DESC*/
+  deleteDesc.forEach((delBtn) => {
+    delBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      let resultDel = delBtn.parentNode;
+      let resultId = resultDel.getAttribute("data-id");
+      descArray.splice(resultId, 1);
+      console.log(descArray);
+      showDesc.innerHTML = "";
+      descArray.forEach((el) => {
+        let id = descArray.indexOf(el);
+        showDesc.innerHTML += `<li class="itemDesc" data-id='${id}'><span>${el}</span><input type='button' value='Eliminar' class="deleteDesc" /></li>`;
+      });
+      deleteDesc = document.querySelectorAll(".deleteDesc");
+    });
+  });
+});
+
+/*THIRD CONFIRM UPLOAD*/
+submitForm3.addEventListener("click", () => {
+  formTres.style.opacity = 0;
+
+  itemTitle.value = "";
+  itemLocate.value = "";
+  itemType.value = "";
+  itemPrice.value = "";
+  itemExp.value = "";
+  itemMets.value = "";
+  itemUsedmets.value = "";
+  itemRooms.value = "";
+  itemCar.value = "";
+  itemAge.value = "";
+  itemDesc.value = "";
+  itemLat.value = "";
+  itemLong.value = "";
+  setTimeout(() => {
+    formTres.style.display = "none";
+    uploadModal.style.display = "none";
+    menu.style.display = "flex";
+    menu.style.opacity = 1;
+  }, 500);
+});
+
+/*IF ADMIN IS LOGGED ON*/
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    login.style.display = "none";
+    menu.style.display = "flex";
+  } else {
+    // User is signed out
+    // ...
+  }
 });
