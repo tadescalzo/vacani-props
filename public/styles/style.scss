@@ -514,15 +514,106 @@ body {
     
   }
   &--admin{
-    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
     &__login{
       width: 100vw;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       img{
         width: 250px;
+      }
+      form{
+        width: 35%;
+        height: 40vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 2rem;
+        font-weight: 700;
+        input {
+          border: none;
+          border-bottom: 1px solid var(--main-bg);
+          width: 50%;
+          outline: none;
+          caret-color: var(--secondary-red);
+        }
+        #login{
+          background-color: var(--secondary-card);
+          border: 1px solid var(--text-main);
+          transition: 0.4s;
+          padding: 0.5rem;
+        }
+        #login:hover{
+          background-color: var(--main-bg);
+          color: var(--main-card);
+        }
+      }
+    }
+    &__menu{
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: 0.5s;
+      .openUpload, .openList{
+        margin-top: 2rem;
+        padding: 1rem 3rem;
+        transition: 0.5s;
+      }
+      .openList:hover, .openUpload:hover{
+        background-color: var(--main-bg);
+        color: var(--main-card);
+      }
+    }
+    &__upload{
+      width: 100%;
+      height: 110vh;
+      margin-top: 5rem;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: 0.5s;
+      #formUno,#formDos,#formTres{
+        width: 50%;
+        height: 90%;
+        border: 1px solid var(--main-bg);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        font-weight: 700;
+        transition: 0.5s;
+        input{
+          width: 40%;
+          border: none;
+          background-color: transparent;
+          border-bottom: 1px solid var(--main-bg);
+          outline: none;
+          margin-top: -1.5rem;
+        }
+        #submitForm1,#submitForm2,#submitForm3{
+          border: 1px solid var(--main-bg);
+          font-weight: 700;
+          transition: 0.5s;
+          margin-top: 0rem;
+          padding: 0.5rem 0rem;
+        }
+        #submitForm1:hover,#submitForm2:hover,#submitForm3:hover{
+          background-color: var(--main-bg);
+          color: var(--main-card);
+        }
+      }
+      #formDos,#formTres{
+        display: none;
       }
     }
   }
