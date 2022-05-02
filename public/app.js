@@ -46,6 +46,7 @@ let formUno = document.querySelector("#formUno");
 let formDos = document.querySelector("#formDos");
 let formTres = document.querySelector("#formTres");
 let itemTitle = document.querySelector("#itemTitle");
+let itemDir = document.querySelector("#itemDir");
 let itemLocate = document.querySelector("#itemLocate");
 let itemType = document.querySelector("#itemType");
 let itemPrice = document.querySelector("#itemPrice");
@@ -53,16 +54,18 @@ let itemExp = document.querySelector("#itemExp");
 let itemMets = document.querySelector("#itemMets");
 let itemUsedmets = document.querySelector("#itemUsedmets");
 let itemRooms = document.querySelector("#itemRooms");
+let itemBaths = document.querySelector("#itemBaths");
 let itemCar = document.querySelector("#itemCar");
 let itemAge = document.querySelector("#itemAge");
 let itemDesc = document.querySelector("#itemDesc");
 let itemLat = document.querySelector("#itemLat");
 let itemLong = document.querySelector("#itemLong");
 let itemPhoto = document.querySelector("#itemPhoto");
+let itemProp = document.querySelector("#itemProp");
 let addDesc = document.querySelector("#addDesc");
 let addPhoto = document.querySelector("#addPhoto");
 let showDesc = document.querySelector("#showDesc");
-let descArray = [];
+let descTest = "";
 
 /*FUNCION CARGAR SERVICIOS DENTRO DEL MODAL*/
 const loadInfo = (services) => {
@@ -824,6 +827,14 @@ const data = new Promise((resolve, reject) => {
   reject(err);
 });
 
+db.collection("global")
+  .get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      itemData = doc.data();
+      console.log(itemData);
+    });
+  });
 /*LOGIN*/
 loginBtn.addEventListener("click", (e) => {
   e.preventDefault;
@@ -874,30 +885,20 @@ submitForm2.addEventListener("click", () => {
 /*ADD DESC*/
 addDesc.addEventListener("click", () => {
   let descResult = itemDesc.value;
-  descArray.push(descResult);
-  console.log(descArray);
   showDesc.innerHTML = "";
-  descArray.forEach((el) => {
-    let id = descArray.indexOf(el);
-    console.log(id);
-    showDesc.innerHTML += `<li class="itemDesc" data-id='${id}'><span>${el}</span><input type='button' value='Eliminar' class="deleteDesc" /></li>`;
-  });
+  descTest += `<li class="itemDesc"><span>${descResult}</span><input type='button' value='Eliminar' class="deleteDesc" /></li>`;
+  showDesc.innerHTML = descTest;
   itemDesc.value = "";
   let deleteDesc = document.querySelectorAll(".deleteDesc");
+
   /*DELETE DESC*/
   deleteDesc.forEach((delBtn) => {
     delBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      let resultDel = delBtn.parentNode;
-      let resultId = resultDel.getAttribute("data-id");
-      descArray.splice(resultId, 1);
-      console.log(descArray);
-      showDesc.innerHTML = "";
-      descArray.forEach((el) => {
-        let id = descArray.indexOf(el);
-        showDesc.innerHTML += `<li class="itemDesc" data-id='${id}'><span>${el}</span><input type='button' value='Eliminar' class="deleteDesc" /></li>`;
-      });
-      deleteDesc = document.querySelectorAll(".deleteDesc");
+      let parentDel = delBtn.parentNode;
+      parentDel.parentNode.removeChild(parentDel);
+      let htmlDesc = showDesc.innerHTML;
+      descTest = htmlDesc;
     });
   });
 });
@@ -905,6 +906,63 @@ addDesc.addEventListener("click", () => {
 /*THIRD CONFIRM UPLOAD*/
 submitForm3.addEventListener("click", () => {
   formTres.style.opacity = 0;
+  /*ADD ITEMS TO DB*/
+  let title = itemTitle.value;
+  let city = itemLocate.value;
+  let dir = itemDir.value;
+  let type = itemType.value;
+  let price = itemPrice.value;
+  let exp = itemExp.value;
+  let mets = itemMets.value;
+  let usedMets = itemUsedmets.value;
+  let rooms = itemRooms.value;
+  let baths = itemBaths.value;
+  let garage = itemCar.value;
+  let age = itemAge.value;
+  let desc = descTest;
+  let lat = itemLat.value;
+  let long = itemLong.value;
+  let prop = itemProp.value;
+  db.collection("global")
+    .add({
+      title: title,
+      price: price,
+      exp: exp,
+      mets: mets,
+      usedMets: usedMets,
+      rooms: rooms,
+      garage: garage,
+      old: age,
+      baths: baths,
+      city: city,
+      type: type,
+      prop: prop,
+      lat: lat,
+      long: long,
+      desc: desc,
+      services: {
+        Internet: false,
+        Electricidad: true,
+        Gas: true,
+        Pavimento: true,
+        Agua: true,
+      },
+      dir: dir,
+    })
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+      let data = docRef;
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Item cargado",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
 
   itemTitle.value = "";
   itemLocate.value = "";

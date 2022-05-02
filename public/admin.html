@@ -72,10 +72,19 @@
           <input type="text" id="itemTitle" />
           <label for="itemLocate">Ciudad</label>
           <input type="text" id="itemLocate" />
+          <label for="itemDir">Direccion</label>
+          <input type="text" id="itemDir" />
           <label for="itemType">Modalidad</label>
           <select name="type" id="itemType">
             <option value="alquiler">Alquiler</option>
             <option value="venta">Venta</option>
+          </select>
+          <label for="itemProp">Tipo de inmueble</label>
+          <select name="type" id="itemProp">
+            <option value="Departamento">Departamento</option>
+            <option value="Casa">Casa</option>
+            <option value="Oficina">Oficina</option>
+            <option value="PH">PH</option>
           </select>
           <label for="itemPrice">Valor</label>
           <input type="text" id="itemPrice" />
@@ -87,6 +96,8 @@
           <input type="text" id="itemUsedmets" />
           <label for="itemRooms">Ambientes</label>
           <input type="text" id="itemRooms" />
+          <label for="itemBaths">Baños</label>
+          <input type="text" id="itemBaths" />
           <label for="itemCar">Cochera</label>
           <input type="text" id="itemCar" />
           <label for="itemAge">Antiguedad</label>
@@ -144,6 +155,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="app.js"></script>
   </body>
 </html>
