@@ -79,7 +79,7 @@ const loadInfo = (services) => {
 };
 
 /*FUNCION ABRIR MODAL POR ITEM*/
-const clickFunction = (items, modal, body) => {
+const clickFunction = (prop, modal, body) => {
   /*UNA VEZ QUE SE CUMPLE CON LA PETICION DE DATOS CARGAMOS LA FUNCION DE MODAL ON CLICK*/
   let cards = document.querySelectorAll(".card");
 
@@ -88,7 +88,7 @@ const clickFunction = (items, modal, body) => {
       let child = e.target;
       let parent = child.parentElement;
       let dataId = parent.getAttribute("data-item");
-      let modalResult = items[dataId - 1];
+      let modalResult = prop;
 
       /*SI TOCAMOS LA CARD Y NO ES UNO NI OTRO SE ABRE EL MODAL*/
       if (
@@ -103,19 +103,23 @@ const clickFunction = (items, modal, body) => {
         document.documentElement.scrollTop = 0;
         const {
           id,
-          title,
-          price,
-          exp,
-          mPlain,
-          mOcc,
-          dorm,
-          garage,
-          old,
           baths,
           city,
-          type,
-          services,
+          desc,
           dir,
+          exp,
+          garage,
+          lat,
+          long,
+          mets,
+          old,
+          price,
+          mode,
+          rooms,
+          services,
+          title,
+          type,
+          usedMets,
         } = modalResult;
         let wppTxt = title.split(" ").join("+");
         setTimeout(() => {
@@ -200,9 +204,9 @@ const clickFunction = (items, modal, body) => {
                 <span>INFORMACION DE LA PROPIEDAD</span>
                 <hr class="modalInfoLine" />
                 <div class="modalInfoInd">
-                  <p><i class="fa-solid fa-vector-square"></i> Metros totales: <strong>${mPlain}</strong></p>
-                  <p><i class="fa-solid fa-vector-square"></i> Metros Cubiertos: <strong>${mOcc}</strong></p>
-                  <p><i class="fa-solid fa-bath"></i> Ambientes: <strong>${dorm}</strong></p>
+                  <p><i class="fa-solid fa-vector-square"></i> Metros totales: <strong>${mets}</strong></p>
+                  <p><i class="fa-solid fa-vector-square"></i> Metros Cubiertos: <strong>${usedMets}</strong></p>
+                  <p><i class="fa-solid fa-bath"></i> Ambientes: <strong>${rooms}</strong></p>
                   <p><i class="fa-solid fa-car"></i> Cochera: <strong>${garage}</strong></p>
                   <p><i class="fa-solid fa-calendar-days"></i> Antiguedad:<br><strong>${old}</strong></p>
                   <p><i class="fa-solid fa-money-bill-1-wave"></i> Valor: <strong>${price}</strong></p>
@@ -211,23 +215,9 @@ const clickFunction = (items, modal, body) => {
               <div class="modalInfo">
                 <span>DESCRIPCION DE LA PROPIEDAD</span>
                 <hr class="modalInfoLine" />
-                <div class="modalInfoDesc">
-                  <p>
-                    Se alquila monoambiente en la Av. Peron altura 2000 Victoria. Se
-                    encuentra en una excelente zoan a cuadras de la estacion de
-                    tren.
-                  </p>
-                  <p>
-                    Se alquila monoambiente en la Av. Peron altura 2000 Victoria. Se
-                    encuentra en una excelente zoan a cuadras de la estacion de
-                    tren.
-                  </p>
-                  <p>
-                    Se alquila monoambiente en la Av. Peron altura 2000 Victoria. Se
-                    encuentra en una excelente zoan a cuadras de la estacion de
-                    tren.
-                  </p>
-                </div>
+                <ul class="modalInfoDesc">
+
+                </ul>
               </div>
               <div class="modalInfo">
                 <span>AMENITIES & SERVICIOS</span>
@@ -235,6 +225,8 @@ const clickFunction = (items, modal, body) => {
                 <ul class="modalInfoCheck">
                 ${setTimeout(() => {
                   loadInfo(services);
+                  let modalInfoDesc = document.querySelector(".modalInfoDesc");
+                  modalInfoDesc.innerHTML = desc;
                 }, 100)}
                 </ul>
               </div>
@@ -448,102 +440,6 @@ const data = new Promise((resolve, reject) => {
           clickFunction(items, modal, body);
         }, 1000);
       });
-
-      /*LOAD GENERAL*/
-      items.forEach((item) => {
-        const {
-          id,
-          title,
-          price,
-          exp,
-          mPlain,
-          mOcc,
-          dorm,
-          garage,
-          old,
-          baths,
-          city,
-          type,
-          services,
-        } = item;
-        container.innerHTML += `<article class="card" data-item=${id}>
-            <div class="card--top">
-              <div id="carousel${id}" data-item=${id} class="carousel slide" data-bs-ride="carousel" data-bs-interval="false" data-pause="hover">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img
-                      src="https://d1994bulhovht.cloudfront.net/AUTOx1080/listings/a691a2d9-21a4-4eca-b5a9-14f532c91b59/90277970-0d15-4132-8187-7232723ad98d.webp"
-                      class="d-block w-100"
-                      alt="..."
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      src="https://d1994bulhovht.cloudfront.net/AUTOx1080/listings/a691a2d9-21a4-4eca-b5a9-14f532c91b59/fb797201-c7f4-4da6-87c5-55836199b77a.webp"
-                      class="d-block w-100"
-                      alt="..."
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      src="https://d1994bulhovht.cloudfront.net/AUTOx1080/listings/a691a2d9-21a4-4eca-b5a9-14f532c91b59/23235dc5-a208-4813-acf5-e11b0143eaa1.webp"
-                      class="d-block w-100"
-                      alt="..."
-                    />
-                  </div>
-                </div>
-                <button
-                  class="carousel-control-prev"
-                  type="button"
-                  data-bs-target="#carousel${id}"
-                  data-bs-slide="prev"
-                >
-                  <span
-                    class="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                  class="carousel-control-next"
-                  type="button"
-                  data-bs-target="#carousel${id}"
-                  data-bs-slide="next"
-                >
-                  <span
-                    class="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-            </div>
-            <div class="card--bottom">
-              <p class="card--bottom__type">
-              ${type}
-              </p>
-              <p class="card--bottom__desc">
-                ${title}
-              </p>
-              <span class="card--bottom__price">${price}</span>
-              ${
-                exp != 0
-                  ? `<span class="card--bottom__exp">+${exp}</span>`
-                  : `<span class="card--bottom__exp">Sin Expensas</span>`
-              }
-              <div class="card--bottom__line"></div>
-              <div class="card--bottom__info">
-                <p><strong>${mPlain}</strong> m² totales</p>
-                <p><strong>${baths}</strong> baños</p>
-                <p><strong>${mOcc}</strong> m² cubiertos</p>
-                <p><strong>${dorm}</strong> ambientes</p>
-              </div>
-            </div>
-          </article>`;
-      });
-
-      /*FUNCION CLICK*/
-      clickFunction(items, modal, body);
 
       /*LOAD ALQUILER*/
       for (alq of navAlq) {
@@ -830,9 +726,104 @@ const data = new Promise((resolve, reject) => {
 db.collection("global")
   .get()
   .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      itemData = doc.data();
-      console.log(itemData);
+    querySnapshot.forEach((item) => {
+      let prop = item.data();
+      const {
+        id,
+        baths,
+        city,
+        desc,
+        dir,
+        exp,
+        garage,
+        lat,
+        long,
+        mets,
+        old,
+        price,
+        mode,
+        rooms,
+        services,
+        title,
+        type,
+        usedMets,
+      } = prop;
+      container.innerHTML += `<article class="card" data-item=${id}>
+          <div class="card--top">
+            <div id="carousel${id}" data-item=${id} class="carousel slide" data-bs-ride="carousel" data-bs-interval="false" data-pause="hover">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="https://d1994bulhovht.cloudfront.net/AUTOx1080/listings/a691a2d9-21a4-4eca-b5a9-14f532c91b59/90277970-0d15-4132-8187-7232723ad98d.webp"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://d1994bulhovht.cloudfront.net/AUTOx1080/listings/a691a2d9-21a4-4eca-b5a9-14f532c91b59/fb797201-c7f4-4da6-87c5-55836199b77a.webp"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="https://d1994bulhovht.cloudfront.net/AUTOx1080/listings/a691a2d9-21a4-4eca-b5a9-14f532c91b59/23235dc5-a208-4813-acf5-e11b0143eaa1.webp"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carousel${id}"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carousel${id}"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+          <div class="card--bottom">
+            <p class="card--bottom__type">
+            ${type}
+            </p>
+            <p class="card--bottom__desc">
+              ${title}
+            </p>
+            <span class="card--bottom__price">${price}</span>
+            ${
+              exp != 0
+                ? `<span class="card--bottom__exp">+${exp}</span>`
+                : `<span class="card--bottom__exp">Sin Expensas</span>`
+            }
+            <div class="card--bottom__line"></div>
+            <div class="card--bottom__info">
+              <p><strong>${mets}</strong> m² totales</p>
+              <p><strong>${baths}</strong> baños</p>
+              <p><strong>${usedMets}</strong> m² cubiertos</p>
+              <p><strong>${rooms}</strong> ambientes</p>
+            </div>
+          </div>
+        </article>`;
+      /*FUNCION CLICK*/
+      clickFunction(prop, modal, body);
     });
   });
 /*LOGIN*/
